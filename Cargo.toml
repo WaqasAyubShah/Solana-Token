@@ -6,3 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+solana-program = "1.9.0"
+solana-program-test = "1.9.0"
+solana-sdk = { version = "1.9.0", features = ["full"] }
