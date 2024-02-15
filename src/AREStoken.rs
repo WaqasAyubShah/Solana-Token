@@ -1,4 +1,4 @@
-use solana_program::{
+use anchor_lang::solana_program::{
     account_info::{next_account_info, AccountInfo},
     clock::Clock,
     entrypoint,
@@ -153,7 +153,7 @@ impl Pack for KingWhale {
 impl Pack for Blacklist {
     const LEN: usize = 33; // 1 (is_initialized) + (32 * 1) (blacklisted_accounts)
 
-    fn.unpack_from_slice(src: &[u8]) -> Result<Self, ProgramError> {
+    fn unpack_from_slice(src: &[u8]) -> Result<Self, ProgramError> {
         let is_initialized = src[0] != 0;
         let blacklisted_accounts = src[1..33].chunks_exact(32).map(|x| Pubkey::new_from_array(x.try_into().unwrap())).collect();
 
@@ -175,7 +175,7 @@ impl Pack for Blacklist {
 impl Pack for Wallets {
     const LEN: usize = 64; // 32-byte marketing_wallet + 32-byte staff_wallet
 
-    fn.unpack_from_slice(src: &[u8]) -> Result<Self, ProgramError> {
+    fn unpack_from_slice(src: &[u8]) -> Result<Self, ProgramError> {
         let marketing_wallet = Pubkey::new_from_array(src[0..32].try_into().unwrap());
         let staff_wallet = Pubkey::new_from_array(src[32..64].try_into().unwrap());
 
